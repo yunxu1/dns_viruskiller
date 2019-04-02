@@ -1,5 +1,5 @@
 @echo off
-
+CHCP 437
 echo check service
 sc stop Ddriver
 sc delete Ddriver

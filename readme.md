@@ -1,0 +1,1 @@
+欺骗powershell病毒/后门自杀

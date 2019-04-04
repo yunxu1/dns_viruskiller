@@ -33,8 +33,6 @@ schtasks /delete /tn "\Microsoft\Credentials" /f
 schtasks /delete /tn "\Microsoft\windows\Bluetooths" /f
 schtasks /delete /tn "\Microsoft\windows\csro" /f
 schtasks /delete /tn "\Microsoft\windows\Rass" /f
-for /f "tokens=1,2,3* delims=," %%a in ('schtasks /query /v /FO CSV ^| findstr /i /r "powershell"') do schtasks /delete /tn %%a /f
-for /f "tokens=1,2,3* delims=," %%a in ('schtasks /query /v /FO CSV ^| findstr /i /r "windows\\temp"') do schtasks /delete /tn %%a /f
 
 for /f "tokens=2 delims=," %%a in ('schtasks /query /v /FO CSV ^| findstr /i /r "powershell"') do schtasks /delete /tn %%a /f
 for /f "tokens=2 delims=," %%a in ('schtasks /query /v /FO CSV ^| findstr /i /r "windows\\temp"') do schtasks /delete /tn %%a /f

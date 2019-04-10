@@ -43,8 +43,8 @@ for /f "tokens=2 delims=," %%a in ('schtasks /query /v /FO CSV ^| findstr /i /r 
 for /f "tokens=2 delims=," %%a in ('schtasks /query /v /FO CSV ^| findstr /i /r "powershell"') do schtasks /delete /tn %%a /f
 for /f "tokens=2 delims=," %%a in ('schtasks /query /v /FO CSV ^| findstr /i /r "windows\\temp"') do schtasks /delete /tn %%a /f
 
-sc stop schedule
-sc start schedule
+net stop schedule
+net start schedule
 
 echo Delete registry
 reg delete HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v WebServers /f

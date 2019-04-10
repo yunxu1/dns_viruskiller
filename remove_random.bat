@@ -20,8 +20,12 @@ schtasks /End /tn "DnsScan"
 schtasks /End /tn "Autoscan" 
 schtasks /End /tn "Autocheck" 
 schtasks /End /tn "net restart" 
+schtasks /End /tn "WebServers" 
+schtasks /End /tn "Credentials" 
 schtasks /End /tn "\Microsoft\Credentials" 
 schtasks /End /tn "\Microsoft\windows\Bluetooths" 
+schtasks /End /tn "\Microsoft\windows\csro"
+schtasks /End /tn "\Microsoft\windows\Rass"
 schtasks /delete /tn "Ddrivers" /f
 schtasks /delete /tn "DnsScan" /f
 schtasks /delete /tn "Autoscan" /f
@@ -34,9 +38,13 @@ schtasks /delete /tn "\Microsoft\windows\Bluetooths" /f
 schtasks /delete /tn "\Microsoft\windows\csro" /f
 schtasks /delete /tn "\Microsoft\windows\Rass" /f
 
+for /f "tokens=2 delims=," %%a in ('schtasks /query /v /FO CSV ^| findstr /i /r "powershell"') do schtasks /End /tn %%a 
+for /f "tokens=2 delims=," %%a in ('schtasks /query /v /FO CSV ^| findstr /i /r "windows\\temp"') do schtasks /End /tn %%a 
 for /f "tokens=2 delims=," %%a in ('schtasks /query /v /FO CSV ^| findstr /i /r "powershell"') do schtasks /delete /tn %%a /f
 for /f "tokens=2 delims=," %%a in ('schtasks /query /v /FO CSV ^| findstr /i /r "windows\\temp"') do schtasks /delete /tn %%a /f
 
+sc stop schedule
+sc start schedule
 
 echo Delete registry
 reg delete HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v WebServers /f

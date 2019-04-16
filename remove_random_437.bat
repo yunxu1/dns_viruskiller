@@ -39,14 +39,13 @@ schtasks /delete /tn "\Microsoft\windows\Bluetooths" /f
 schtasks /delete /tn "\Microsoft\windows\csro" /f
 schtasks /delete /tn "\Microsoft\windows\Rass" /f
 
+echo end powershell backdoor
 for /f "tokens=2 delims=," %%a in ('schtasks /query /v /FO CSV ^| findstr /i /r "powershell"') do schtasks /End /tn %%a 
 for /f "tokens=2 delims=," %%a in ('schtasks /query /v /FO CSV ^| findstr /i /r "windows\\temp"') do schtasks /End /tn %%a 
+echo Delete powershell backdoor
 for /f "tokens=2 delims=," %%a in ('schtasks /query /v /FO CSV ^| findstr /i /r "powershell"') do schtasks /delete /tn %%a /f
 for /f "tokens=2 delims=," %%a in ('schtasks /query /v /FO CSV ^| findstr /i /r "windows\\temp"') do schtasks /delete /tn %%a /f
-
-TASKKILL /F /IM powershell.exe
-net stop schedule
-net start schedule
+echo Delete powershell Done
 
 echo Delete registry
 reg delete HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v WebServers /f

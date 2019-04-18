@@ -1,4 +1,4 @@
-﻿Restart-Service schedule
+﻿Start-Service schedule
 $service=New-Object -ComObject("Schedule.Service")
 $service.Connect($env:COMPUTERNAME)
 Function DeletePowershellTaskScheduler($TaskPath){
